@@ -9,6 +9,7 @@
 package programmingtheiot.gda.system;
 
 import java.lang.management.ManagementFactory;
+
 import java.lang.management.OperatingSystemMXBean;
 
 import java.util.logging.Logger;
@@ -17,12 +18,13 @@ import programmingtheiot.common.ConfigConst;
 
 import programmingtheiot.common.ConfigConst;
 
+import java.io.File ;
 
 /**
  * Shell representation of class for student implementation.
  * 
  */
-public class SystemCpuUtilTask extends BaseSystemUtilTask
+public class SystemDiskUtilTask extends BaseSystemUtilTask
 {
 	// constructors
 	
@@ -30,7 +32,7 @@ public class SystemCpuUtilTask extends BaseSystemUtilTask
 	 * Default.
 	 * 
 	 */
-	public SystemCpuUtilTask()
+	public SystemDiskUtilTask()
 	{
 		super(ConfigConst.NOT_SET, ConfigConst.DEFAULT_TYPE_ID);
 	}
@@ -41,9 +43,9 @@ public class SystemCpuUtilTask extends BaseSystemUtilTask
 	@Override
 	public float getTelemetryValue()
 	{
-		OperatingSystemMXBean mxBean = ManagementFactory.getOperatingSystemMXBean();
-	    double cpuUtil = mxBean.getSystemLoadAverage();
-	    return (float) cpuUtil;
+		File root = new File("/");
+	    double DiskUtil = 1.0f - ((double)root.getFreeSpace()/ (double)root.getTotalSpace());
+	    return (float) DiskUtil;
 	}
 	
 }

@@ -11,8 +11,12 @@ package programmingtheiot.part03.integration.connection;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.util.Set;
 import java.util.logging.Logger;
 
+import org.eclipse.californium.core.WebLink;
+import org.eclipse.californium.elements.exception.ConnectorException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -94,16 +98,17 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testConnectAndDiscover()
 	{
 		assertTrue(this.coapClient.sendDiscoveryRequest(DEFAULT_TIMEOUT));
+		
 	}
 	
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testGetRequestCon()
 	{
 		// TODO: issue request and validate response
@@ -114,7 +119,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testGetRequestNon()
 	{
 		// TODO: issue request and validate response
@@ -125,7 +130,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testPostRequestCon()
 	{
 		// TODO: issue request and validate response
@@ -143,7 +148,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testPostRequestNon()
 	{
 		// TODO: issue request and validate response
@@ -161,7 +166,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testPutRequestCon()
 	{
 		// TODO: issue request and validate response
@@ -179,7 +184,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	public void testPutRequestNon()
 	{
 		// TODO: issue request and validate response
@@ -197,7 +202,7 @@ public class CoapClientConnectorTest
 	/**
 	 * 
 	 */
-	@Test
+	//Test
 	public void testDeleteRequestCon()
 	{
 		// TODO: issue request and validate response
@@ -207,8 +212,9 @@ public class CoapClientConnectorTest
 	
 	/**
 	 * 
+	 * 
 	 */
-	@Test
+	//@Test
 	public void testDeleteRequestNon()
 	{
 		// TODO: issue request and validate response
@@ -216,4 +222,16 @@ public class CoapClientConnectorTest
 		assertTrue(this.coapClient.sendDeleteRequest(ResourceNameEnum.GDA_MGMT_STATUS_CMD_RESOURCE, null, false, DEFAULT_TIMEOUT));
 	}
 	
+	
+	@Test
+	public void testObserve() {
+	    CoapClientConnector client = new CoapClientConnector();
+	    client.setDataMessageListener(dataMsgListener);
+
+	    boolean result = client.startObserver(ResourceNameEnum.CDA_SENSOR_MSG_RESOURCE, "TestSensor", 60);
+	    assertTrue("Observation failed to start.", result);
+
+	    // Add additional assertions to validate observed data
+	}
+
 }

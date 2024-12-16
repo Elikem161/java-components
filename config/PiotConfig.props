@@ -40,28 +40,31 @@ enableCrypt    = True
 #
 [Mqtt.GatewayService]
 credFile       = ./cred/PiotMqttCred.props
-certFile       = ./cert/PiotMqttLocalCertFile.pem
+certFile       = /home/cd/programmingtheiot/server.crt
 host           = localhost
 port           = 1883
 securePort     = 8883
 defaultQoS     = 0
 keepAlive      = 60
 enableAuth     = False
-enableCrypt    = False
+enableCrypt    = True
 useAsyncClient = False
 
 #
 # CoAP client and server configuration information
 #
 [Coap.GatewayService]
-credFile       = ./cred/PiotCoapCred.props
-certFile       = ./cert/PiotCoapLocalCertFile.pem
-host           = localhost
-port           = 5683
-securePort     = 5684
-enableAuth     = False
-enableCrypt    = False
-enableConfirmedMsgs = True
+credFile                = ./cred/PiotCoapCred.props
+certFile                = ./cert/PiotCoapLocalCertFile.pem
+host                    = localhost
+port                    = 5683
+securePort              = 5684
+enableAuth              = False
+enableCrypt             = False
+enableConfirmedMsgs     = True
+useBlockTransfer        = False
+maxMessageSize          = 1024
+observeNotificationType = NON
 
 #
 # GDA specific configuration information
@@ -71,12 +74,14 @@ deviceLocationID        = gatewaydevice001
 enableLogging           = True
 pollCycleSecs           = 60
 enableMqttClient        = True
-enableCoapServer        = False
-enableCoapClient        = False
+enableCoapServer        = True
+enableCoapClient        = True
 enableCloudClient       = False
 enableSmtpClient        = False
 enablePersistenceClient = False
-enableSystemPerformance = False
+enableSystemPerformance = True
 testGdaDataPath         = /tmp/gda-data
 testCdaDataPath         = /tmp/cda-data
 testEmptyApp            = False
+runForever		= True
+
